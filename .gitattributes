@@ -1,0 +1,10 @@
+# 统一换行：仓库内一律用 LF
+* text=auto eol=lf
+
+# 二进制文件，不做换行转换
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.dll binary
+*.exe binary

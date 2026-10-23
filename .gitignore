@@ -1,0 +1,19 @@
+# 构建产物（Build.ps1 默认输出到 build\）
+build/
+
+# 本地打包产物（绿色包放 GitHub Releases，不进仓库）
+release/
+
+# Visual Studio / 编辑器
+.vs/
+*.user
+*.suo
+
+# 系统与临时文件
+Thumbs.db
+Desktop.ini
+*.tmp
+*.bak
+*.bak-*
+~*
+_peek*
