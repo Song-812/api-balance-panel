@@ -1,4 +1,4 @@
-# 余额面板 · API Balance Panel
+﻿# 余额面板 · API Balance Panel
 
 [English](README.en.md) | 简体中文
 
@@ -27,7 +27,7 @@
 
 ## 快速开始
 
-1. 到 [Releases](https://github.com/Song-812/api-balance-panel/releases/latest) 下载 `api-balance-panel-v1.0.0.zip`
+1. 到 [Releases](https://github.com/Song-812/api-balance-panel/releases/latest) 下载 `api-balance-panel-v1.0.1.zip`
 2. 解压到任意文件夹 —— **别只把 exe 拖出来**，它要和同目录的 dll、js 待在一起
 3. 双击 `API余额面板.exe`
 4. 点右上角齿轮 → 填各家的密钥或点「打开登录窗口」→ 保存

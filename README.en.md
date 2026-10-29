@@ -1,4 +1,4 @@
-# API Balance Panel
+﻿# API Balance Panel
 
 English | [简体中文](README.md)
 
@@ -26,7 +26,7 @@ Checking balances means opening nine dashboards a day. This panel puts them on o
 
 ## Quick start
 
-1. Download `api-balance-panel-v1.0.0.zip` from [Releases](https://github.com/Song-812/api-balance-panel/releases/latest)
+1. Download `api-balance-panel-v1.0.1.zip` from [Releases](https://github.com/Song-812/api-balance-panel/releases/latest)
 2. Extract anywhere — **do not move the exe alone**, it needs the dll and js files next to it
 3. Run `API余额面板.exe`
 4. Click the gear icon → enter keys or click the login button → Save
