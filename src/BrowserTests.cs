@@ -87,7 +87,7 @@ internal static class BrowserTests
             Check("failed login navigation does not force a new network request when reading the displayed balance",readError == null && reading != null && reading.DisplayValue.Contains("88.80") && navigations == beforeRead);
             cancel = false; amount = "91.20";
             Exception refreshError = await FailureAsync(async delegate { reading = await session.ReadAsync(); });
-            Check("background session reads reuse the owned page when it is already the balance URL",refreshError == null && reading.DisplayValue.Contains("88.80") && navigations == beforeRead);
+            Check("background MiMo reads soft-navigate so cash balance can refresh",refreshError == null && reading.DisplayValue.Contains("91.20") && navigations > beforeRead);
             await BalancePanel.BrowserNavigation.GoToBalanceAsync(browser,"https://balance.test/login");
             status = 403;
             Window sessionHost = (Window)type.GetField("host",PrivateInstance).GetValue(session);
@@ -137,6 +137,8 @@ internal static class BrowserTests
                     { "openai", "<section><span>Credit balance</span><b>$5.00</b><b>$6.00</b></section>", "" },
                     { "mimo", "<section><span>可用余额</span><b>123.45</b></section>", "" },
                     { "mimo", "<section><span>账户余额</span><b>42.50 元</b></section>", "账户余额 42.50 元" },
+                    { "mimo", "<section><div>现金余额：￥ 27.55</div><div>赠送余额：￥ 0.00</div></section>", "现金余额 ￥ 27.55" },
+                    { "mimo", "<section><span>余额</span><strong>￥ 27.55</strong><div>现金余额：￥ 27.55</div></section>", "余额 ￥ 27.55" },
                     { "mimo", "<section><span>可用余额</span><b>¥12.00</b></section><section><span>账户余额</span><b>¥12.00</b></section>", "可用余额 ¥12.00" },
                     { "openai", "<section><span>Credit balance</span><b>-$12.00</b></section>", "Credit balance $-12.00" },
                     { "openai", "<section><span>Credit balance</span><i>unavailable</i><p>Monthly cost $45.00</p></section>", "" },

@@ -67,7 +67,7 @@ namespace BalancePanel
             instructions.Children.Add(read); instructions.Children.Add(feedback);
             DockPanel.SetDock(instructions, Dock.Top); layout.Children.Add(instructions);
             browser = new WebView2(); layout.Children.Add(browser); host.Content = layout;
-            host.Closing += delegate(object sender, CancelEventArgs e) { if(!disposed) { e.Cancel = true; host.Hide(); } };
+            host.Closing += delegate(object sender, CancelEventArgs e) { if(!disposed) { e.Cancel = true; BrowserHost.Park(host); } };
         }
 
         public async Task ShowLoginAsync()
@@ -124,6 +124,10 @@ namespace BalancePanel
                     if(!(Uri.TryCreate(browser.CoreWebView2.Source,UriKind.Absolute,out current) &&
                         (BrowserReadState.IsBalancePage(current,targetUri) || BrowserNavigation.IsChallengeOrAuthHold(current,targetUri))))
                         await BrowserNavigation.GoToBalanceAsync(browser,Target);
+                } else if(provider == "mimo") {
+                    // MiMo's SPA keeps the parked DOM until the balance route loads again; a soft
+                    // re-navigation refreshes cash/gift figures without clearing the login session.
+                    await BrowserNavigation.NavigateForLoginAsync(browser,Target);
                 } else await BrowserNavigation.EnsureDisplayedBalanceAsync(browser,Target);
             } catch(BrowserNavigationException error) { readFailure = error.Message; throw; }
             var serializer = new JavaScriptSerializer();

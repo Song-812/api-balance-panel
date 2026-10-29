@@ -113,6 +113,7 @@ internal static class CoreTests
         Test("GLM falls back to balance", delegate { Equal("CNY 42.50", BalanceParsers.Glm("{\"code\":200,\"data\":{\"balance\":42.5}}").DisplayValue); });
         Test("GLM rejects non-success", delegate { Throws<FormatException>(delegate { BalanceParsers.Glm("{\"code\":1001,\"success\":false,\"data\":{\"availableBalance\":1}}"); }); });
         Page("mimo", "账户余额：¥12.30", "CNY 12.30");
+        Page("mimo", "现金余额：￥27.55", "CNY 27.55");
         Page("mimo", "可用余额\n12.30 元", "CNY 12.30");
         Page("openai", "Credit balance\n$0.00", "USD 0.00");
         Page("xai", "Credit balance: USD 1,234.50", "USD 1234.50");

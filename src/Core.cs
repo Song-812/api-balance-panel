@@ -195,7 +195,7 @@ namespace BalancePanel
             if (provider == "vpn") throw InvalidBalance();
             ValidateText(text);
             if (Match(text, @"[<>]|费用|成本|消费|用量|已用|欠费|\b(?:cost|usage|spent|spend|expense)\b").Success) throw InvalidBalance();
-            string pattern = @"\A\s*(?:账户余额|可用余额|总余额|余额|赠金余额|可用赠金|可用额度|(?:Credit|Available|Account)\s+balance|Available\s+credits?)\s*[:：]?\s*" +
+            string pattern = @"\A\s*(?:账户余额|可用余额|总余额|现金余额|余额|赠金余额|可用赠金|可用额度|(?:Credit|Available|Account)\s+balance|Available\s+credits?)\s*[:：]?\s*" +
                 @"(?<prefix>USD|CNY|US\$|\$|¥|￥)?\s*(?<amount>" + DecimalPattern + @")\s*(?<suffix>USD|CNY|美元|元)?\s*\z";
             Match match = Match(text, pattern);
             if (!match.Success) throw InvalidBalance();

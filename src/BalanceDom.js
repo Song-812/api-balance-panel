@@ -3,7 +3,7 @@ function (provider) {
     if (provider === 'gemini') return '';
     const labels = (provider === 'openai')
         ? ['API credit balance', 'Credit balance', 'Available balance']
-        : ['可用余额', '账户余额', '总余额', 'Available balance', 'Account balance', '余额'];
+        : ['可用余额', '账户余额', '总余额', 'Available balance', 'Account balance', '余额', '现金余额'];
     const number = '-?\\d[\\d,]*(?:\\.\\d+)?';
     const currency = '(?:US\\$|USD|CNY|RMB|[¥￥$])';
     const money = new RegExp('^(?:-?\\s*' + currency + '\\s*' + number +
@@ -51,6 +51,20 @@ function (provider) {
                 const normalized = normalize(amount);
                 if (normalized) return resultLabel + ' ' + normalized;
             }
+        }
+        // MiMo often renders "现金余额：￥ 27.55" in one node (no separate label element).
+        for (const element of elements) {
+            if (!visible(element) || interactive(element)) continue;
+            const text = clean(element.innerText || '');
+            if (text.length <= label.length) continue;
+            if (text.slice(0, label.length).toLowerCase() !== label.toLowerCase()) continue;
+            const amount = text.slice(label.length).replace(/^\s*[:：]?\s*/, '');
+            if (!money.test(amount)) continue;
+            const normalized = normalize(amount);
+            if (!normalized) continue;
+            // Two money values in sibling nodes stay ambiguous.
+            if (amountIn(element.nextElementSibling)) continue;
+            return resultLabel + ' ' + normalized;
         }
     }
     return '';
