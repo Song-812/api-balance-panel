@@ -1,4 +1,4 @@
-﻿# 余额面板 · API Balance Panel
+# 余额面板 · API Balance Panel
 
 [English](README.en.md) | 简体中文
 

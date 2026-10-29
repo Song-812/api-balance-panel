@@ -1,4 +1,4 @@
-﻿# API Balance Panel
+# API Balance Panel
 
 English | [简体中文](README.md)
 
